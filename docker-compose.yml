@@ -10,5 +10,5 @@ services:
     ports:
       - "5005:5000"
     volumes:
-      - /opt/library/faces/:/opt/library/faces
-      - /opt/library/faces/:/root/.deepface
+      - /opt/library/faces:/opt/library/faces
+      - /opt/library/faces:/root/.deepface
