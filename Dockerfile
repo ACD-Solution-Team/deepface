@@ -9,14 +9,21 @@ RUN mkdir /app/deepface
 RUN mkdir /opt/library
 RUN mkdir /opt/library/faces
 
+
+
 # -----------------------------------
 # switch to application directory
 WORKDIR /app
 
 # -----------------------------------
 # update image os
-RUN apt-get update
-RUN apt-get install ffmpeg libsm6 libxext6 -y
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libhdf5-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # set memory ulimit for python
 RUN ulimit -s 65536
@@ -33,6 +40,7 @@ COPY ./requirements_local /app/requirements_local.txt
 COPY ./package_info.json /app/
 COPY ./setup.py /app/
 COPY ./README.md /app/
+COPY ./entrypoint.sh /app/deepface/api/src/entrypoint.sh
 
 RUN pip3 install --upgrade pip
 
@@ -71,4 +79,5 @@ ENV PYTHONUNBUFFERED=1
 # run the app (re-configure port if necessary)
 WORKDIR /app/deepface/service/src
 EXPOSE 5000
-CMD ["gunicorn", "--workers=1", "--timeout=3600", "--bind=0.0.0.0:5000", "app:create_app()"]
+# CMD ["gunicorn", "--workers=1", "--timeout=3600", "--bind=0.0.0.0:5000", "app:create_app()"]
+ENTRYPOINT [ "sh", "entrypoint.sh" ]
