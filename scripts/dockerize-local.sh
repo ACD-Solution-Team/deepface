@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Dockerfile is in the root
 cd ..
 
@@ -11,14 +12,14 @@ cd ..
 docker rm -f $(docker ps -a -q --filter "ancestor=deepface")
 
 # build deepface image
-docker build -t deepface .
+docker build -f Dockerfile-elibra -t deepface-elibra .
 
 # copy weights from your local
 # docker cp ~/.deepface/weights/. <CONTAINER_ID>:/root/.deepface/weights/
 
 # run the built image
 # docker run --net="host" deepface
-docker run -p 5005:5000 deepface
+docker run -p 5005:5000 deepface-elibra
 
 # or pull the pre-built image from docker hub and run it
 # docker pull serengil/deepface
