@@ -98,11 +98,8 @@ def find(
         results = []
         for line in dfs:
             for i in range(total):
-                if i < len(line.get(fields[0])):  # Ensure index is within range
+                if all(i < len(line.get(field)) for field in fields):  # Ensure index is within range for all fields
                     results.append({field: line.get(field)[i] for field in fields})
-                    for field in fields:
-                        val = line.get(field)
-                        results[-1][field] = val[i]
         return results
     except Exception as err:
         tb_str = traceback.format_exc()
