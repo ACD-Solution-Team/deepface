@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  deepface:
+    image: serengil/deepface
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 2048
+    ports:
+      - "5005:5000"
+    volumes:
+      - /opt/library/faces/:/opt/library/faces
+  portainer:
+    container_name: Portainer
+    image: portainer/portainer-ce:latest
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /Volumes/Data/src/repos/docker/portainer/data:/data
