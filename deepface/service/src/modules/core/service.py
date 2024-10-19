@@ -96,10 +96,11 @@ def find(
         total = len(dfs[0])
         fields = ["identity", "threshold", "distance"]
         results = []
-        for line in dfs:
-            for i in range(total):
-                if all(i < len(line.get(field)) for field in fields):  # Ensure index is within range for all fields
-                    results.append({field: line.get(field)[i] for field in fields})
+        # dns to text
+
+        for i in range(total):
+            if all(i < len(dfs[0].get(field)) for field in fields):
+                results.append({field: dfs[0].get(field)[i] for field in fields})
         return results
     except Exception as err:
         tb_str = traceback.format_exc()

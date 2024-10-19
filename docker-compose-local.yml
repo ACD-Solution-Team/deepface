@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  deepface:
+    image: deepface-elibra
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 2048
+    ports:
+      - "5005:5000"
+    volumes:
+      - /Users/serik/FlutterProject/elibra/face-recognation/examples:/opt/library/faces
+      - /Users/serik/FlutterProject/elibra/face-recognation/examples:/root/.deepface

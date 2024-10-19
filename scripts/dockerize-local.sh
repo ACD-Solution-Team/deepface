@@ -19,7 +19,7 @@ docker build -f Dockerfile-elibra -t deepface-elibra .
 
 # run the built image
 # docker run --net="host" deepface
-docker run -p 5005:5000 deepface-elibra
+docker run -p 5005:5000 deepface-elibra -v /opt/libra/faces /Users/serik/FlutterProject/elibra/face-recognation/examples/
 
 # or pull the pre-built image from docker hub and run it
 # docker pull serengil/deepface
