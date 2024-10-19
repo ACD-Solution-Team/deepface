@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   deepface:
-    image: serengil/deepface
+    image: deepface-elibra
     ulimits:
       nofile:
         soft: 1024

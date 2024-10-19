@@ -9,7 +9,7 @@ cd ..
 # docker container ls -a
 
 # delete existing deepface packages
-docker rm -f $(docker ps -a -q --filter "ancestor=deepface")
+docker rm -f $(docker ps -a -q --filter "ancestor=deepface-elibra")
 
 # build deepface image
 docker build -f Dockerfile-elibra -t deepface-elibra .
