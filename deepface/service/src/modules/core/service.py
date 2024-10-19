@@ -94,17 +94,15 @@ def find(
             refresh_database=refresh_database,
         )
         total = len(dfs[0])
-        fields = ["identity","threshold","distance"]
+        fields = ["identity", "threshold", "distance"]
         results = []
-        for i in range(len(dfs)):
-            line = dfs[i]
+        for line in dfs:
             for i in range(total):
-                results.append({field: line.get(field)[i] for field in fields})
-                for field in fields:
-                    # print(f"{field}:", line.get(field))
-                    val = line.get(field)
-                    #print(f"{field} - val: {val[i]}")
-                    results[-1][field] = val[i]
+                if i < len(line.get(fields[0])):  # Ensure index is within range
+                    results.append({field: line.get(field)[i] for field in fields})
+                    for field in fields:
+                        val = line.get(field)
+                        results[-1][field] = val[i]
         return results
     except Exception as err:
         tb_str = traceback.format_exc()
