@@ -96,10 +96,9 @@ def find(
         total = len(dfs[0])
         fields = ["identity", "threshold", "distance"]
         results = []
-        # dns to text
 
         for i in range(total):
-            if all(i < len(dfs[0].get(field)) for field in fields):
+            if i < 27 and all(i < len(dfs[0].get(field, [])) for field in fields):
                 results.append({field: dfs[0].get(field)[i] for field in fields})
         return results
     except Exception as err:
