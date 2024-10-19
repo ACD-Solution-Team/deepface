@@ -97,9 +97,12 @@ def find(
         fields = ["identity", "threshold", "distance"]
         results = []
 
-        for i in range(total):
-            if i < 27 and all(i < len(dfs[0].get(field, [])) for field in fields):
-                results.append({field: dfs[0].get(field)[i] for field in fields})
+        # just conver dfs to str and return him
+        results.append(dfs[0].to_string())
+
+        # for i in range(total):
+        #     if i < 27 and all(i < len(dfs[0].get(field, [])) for field in fields):
+        #         results.append({field: dfs[0].get(field)[i] for field in fields})
         return results
     except Exception as err:
         tb_str = traceback.format_exc()
