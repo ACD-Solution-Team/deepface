@@ -95,6 +95,7 @@ def find():
         distance_metric=input_args.get("distance_metric", "cosine"),
         align=input_args.get("align", True),
         enforce_detection=input_args.get("enforce_detection", True),
+        normalization=input_args.get("normalization", "base"),
         anti_spoofing=input_args.get("anti_spoofing", False),
         refresh_database=input_args.get("refresh_database", False),
     )
