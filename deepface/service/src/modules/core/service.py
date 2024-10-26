@@ -81,6 +81,7 @@ def find(
         align: bool,
         anti_spoofing: bool,
         refresh_database: bool,
+        threshold: Optional[float] = None,
 ):
     try:
         dfs = DeepFace.find(
@@ -94,11 +95,13 @@ def find(
             enforce_detection=enforce_detection,
             anti_spoofing=anti_spoofing,
             refresh_database=refresh_database,
+            threshold=threshold,
         )
         total = len(dfs[0])
         fields = ["identity", "threshold", "distance"]
         results = []
         # dns to text
+
 
         for i in range(total):
             if all(i < len(dfs[0].get(field)) for field in fields):

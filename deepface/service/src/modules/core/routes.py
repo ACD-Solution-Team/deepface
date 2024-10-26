@@ -98,6 +98,7 @@ def find():
         normalization=input_args.get("normalization", "base"),
         anti_spoofing=input_args.get("anti_spoofing", False),
         refresh_database=input_args.get("refresh_database", False),
+        threshold=input_args.get("threshold", None),
     )
 
     logger.debug(verification)
