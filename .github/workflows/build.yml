@@ -1,0 +1,36 @@
+name: Build and Push Docker Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image version tag'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  build:
+    runs-on: [self-hosted, elibra-runner]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Registry
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login registry.elibra.kz -u elibra --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -f Dockerfile-elibra \
+            -t registry.elibra.kz/deepface:${{ github.event.inputs.version }} \
+            -t registry.elibra.kz/deepface:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push registry.elibra.kz/deepface:${{ github.event.inputs.version }}
+          docker push registry.elibra.kz/deepface:latest
+
+      - name: Cleanup
+        run: |
+          docker rmi registry.elibra.kz/deepface:${{ github.event.inputs.version }} || true
+          docker rmi registry.elibra.kz/deepface:latest || true
